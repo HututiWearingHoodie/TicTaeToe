@@ -4,7 +4,7 @@ import Board from "./components/Board";
 import Button from "./components/Button";
 
 const Start = () => {
-  function hello() {
+  return (
     <div className="w-screen h-screen bg-blue-200 flex justify-center items-center gap-5 ">
       <div className="w-full flex flex-col justify-center items-center gap-5 sm:flex-row ">
         <Board />
@@ -16,12 +16,12 @@ const Start = () => {
                 Solo
               </Button>
             </Link>
-            <Button text="Multi" color="bg-teal-200" onClick={hello} />
+            <Button text="Multi" color="bg-teal-200" />
           </div>
         </div>
       </div>
-    </div>;
-  }
+    </div>
+  );
 };
 
 export default Start;

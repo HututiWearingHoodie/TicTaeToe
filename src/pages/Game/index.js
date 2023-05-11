@@ -1,5 +1,14 @@
+import Board from "./components/Board";
+import Button from "./components/Button";
+
 const Game = () => {
-  return <h1>hi game</h1>;
+  return (
+    <div className="w-screen h-screen bg-blue-200 flex justify-center items-center gap-5">
+      <div className="w-full flex justify-center gap-5">
+        <Board />
+      </div>
+    </div>
+  )
 };
 
 export default Game;

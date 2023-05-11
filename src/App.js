@@ -1,11 +1,10 @@
-import { Link, Outlet } from "react-router-dom";
+import { Outlet } from "react-router-dom";
+import Header from "./components/Header";
 
 function App() {
   return (
     <>
-      <Link to="/">Home</Link>
-      <br />
-      <Link to="/game">Game</Link>
+      <Header />
       <Outlet />
     </>
   );

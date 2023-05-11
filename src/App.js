@@ -6,6 +6,8 @@ function App() {
       <Link to="/">Home</Link>
       <br />
       <Link to="/game">Game</Link>
+      <br />
+      <Link to="/board">Board</Link>
       <Outlet />
     </>
   );

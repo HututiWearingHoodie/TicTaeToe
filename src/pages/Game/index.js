@@ -1,5 +1,4 @@
 import Board from "./components/Board";
-import Button from "./components/Button";
 
 const Game = () => {
   return (

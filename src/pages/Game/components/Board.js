@@ -2,39 +2,40 @@ import { useEffect, useState } from "react";
 import O from "./O";
 import X from "./X";
 import { useNavigate } from "react-router-dom";
-import { toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Board = () => {
   const [game, setGame] = useState(Array(9).fill(undefined));
   const [count, setCount] = useState(0);
   const navigate = useNavigate();
-  const handleGame = (idx) =>{
-    if(game[idx]!==undefined) return;
+
+  const handleGame = (idx) => {
+    if (game[idx] !== undefined) return;
 
     let prevGame = [...game];
-    prevGame[idx] = count%2;
-    setCount((prevCount)=> prevCount+1);
+    prevGame[idx] = count % 2 === 0 ? "O" : "X";
+    setCount((prevCount) => prevCount + 1);
     setGame(prevGame);
-    checkWin();
-  }
-  useEffect(()=>{
+    checkWin(prevGame);
+  };
+
+  useEffect(() => {
     const checker = checkWin(game);
-    if(!checker){
-      if(count===9){
+    if (!checker) {
+      if (count === 9) {
         toast("Draw");
         setTimeout(() => {
-          navigate('/game');
+          navigate("/game");
         }, 2000);
       }
-    }else{
-      toast("You Win "+checker.toString());
+    } else {
+      toast("You Win " + checker.toString());
       setTimeout(() => {
-        navigate('/game');
+        navigate("/game");
       }, 2000);
     }
-  },[game]);
-
+  }, [game]);
 
   const checkWin = (game) => {
     const win = [
@@ -47,16 +48,14 @@ const Board = () => {
       [0, 4, 8],
       [2, 4, 6],
     ];
-    for(let i=0;i<win.length; i++){
+    for (let i = 0; i < win.length; i++) {
       const [a, b, c] = win[i];
-      if(game[a]!==undefined &&game[a]===game[b]&&game[a]===game[c]){ 
-        if(game[a].toString()==="0")
-          return "O"
-        else
-          return "X"
+      if (game[a] !== undefined && game[a] === game[b] && game[a] === game[c]) {
+        if (game[a] === "O") return "O";
+        else return "X";
       }
-    }   
-  }
+    }
+  };
 
   return (
     <div className="w-10/12 aspect-square bg-rose-300 rounded-lg overflow-hidden sm:w-6/12">
@@ -64,10 +63,12 @@ const Board = () => {
         {game.map((item, index) => (
           <div
             className="aspect-square bg-rose-300 flex justify-center items-center cursor-pointer hover:bg-rose-200"
-            onClick={()=>handleGame(index)} key={index}
-          >{item!==undefined ? item %2===0 ? <O /> : <X /> : ""}
+            onClick={() => handleGame(index)}
+            key={index}
+          >
+            {item !== undefined ? item === "O" ? <O /> : <X /> : ""}
           </div>
-         ))}
+        ))}
       </div>
     </div>
   );
